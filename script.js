@@ -27,7 +27,7 @@ const addButton = (post) => {
 	let button = document.createElement("BUTTON");
 	button.innerHTML = 'Hide';
 	post.querySelector('.Post').appendChild(button);
-	$(button).css('position', 'absolute').css('top', 80).css('left', 6).css('font-size', 14).css('color', 'white');
+	$(button).css({"position": "absolute", "top": "80px", "left": "2px", "font-size": "14px", "color": "white", "background-color": "black", "border-radius": "4px", "padding": "4px"})
 	button.addEventListener('click', (e) => {
 		hidePost(post)
 	})
@@ -65,9 +65,28 @@ const hideStoragePost = (post) => {
 	}
 }
 
+const addClearStorageButton = () => {
+	let button = document.createElement("BUTTON");
+	button.innerHTML = 'Restore Hidden Posts';
+	$(button).css({"position": "absolute", "color": "white", "top": "60px", "left": "20px", "background-color": "black", "border-radius": "8px", "padding": "12px"})
+	const header = document.querySelector("header");
+	header.appendChild(button);
+	button.addEventListener("click", () => {
+		let storage = localStorage.getItem("hiddenPosts");
+		if (storage) {
+			localStorage.removeItem("hiddenPosts");
+			location.reload();
+		}
+	})
+}
+
 $(document).ready(function() {
 	let allPostsContainer = document.querySelector(".rpBJOHq2PR60pnwJlUyP0");
 	if (allPostsContainer) {
+		addClearStorageButton();
 		init(allPostsContainer.children);
+		window.addEventListener('scroll', () => {
+			init(allPostsContainer.children);
+		})
 	}
 })
