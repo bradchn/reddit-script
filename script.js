@@ -11,5 +11,6 @@
 (function() {
     'use strict';
 
-    console.log("im in reddit")
+    let allPostsContainer = document.querySelector(".rpBJOHq2PR60pnwJlUyP0");
+    
 })();
